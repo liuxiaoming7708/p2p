@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - p2p@localhost" uuid="28a0b8cc-6eac-4e12-acac-53b27cd5e92f">
+    <database-info product="MySQL" version="5.7.18" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
+      <schema id="1" name="p2p"/>
+      <table id="2" parent="1" name="account"/>
+      <table id="3" parent="1" name="bid"/>
+      <table id="4" parent="1" name="bidrequest"/>
+      <table id="5" parent="1" name="bidrequestaudithistory"/>
+      <table id="6" parent="1" name="iplog"/>
+      <table id="7" parent="1" name="login_info"/>
+      <table id="8" parent="1" name="mailverify"/>
+      <table id="9" parent="1" name="platformbankinfo"/>
+      <table id="10" parent="1" name="realauth"/>
+      <table id="11" parent="1" name="systemdictionary"/>
+      <table id="12" parent="1" name="systemdictionaryitem"/>
+      <table id="13" parent="1" name="userfile"/>
+      <table id="14" parent="1" name="userinfo"/>
+      <table id="15" parent="1" name="vedioauth"/>
+      <column id="16" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="17" parent="2" name="tradePassword">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="18" parent="2" name="usableAmount">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="19" parent="2" name="freezedAmount">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="20" parent="2" name="borrowLimit">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="21" parent="2" name="version">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="22" parent="2" name="unReceiveInterest">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="23" parent="2" name="unReceivePrincipal">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="24" parent="2" name="unReturnAmount">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="25" parent="2" name="remainBorrowLimit">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <key id="26" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="27" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="28" parent="3" name="actualRate">
+        <mandatory>1</mandatory>
+        <data-type>decimal(8,4)</data-type>
+      </column>
+      <column id="29" parent="3" name="availableAmount">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="30" parent="3" name="bidRequest_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="31" parent="3" name="bidUser_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="32" parent="3" name="bidTime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="33" parent="3" name="bidRequestTitle">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="34" parent="3" name="bidRequestState">
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <key id="35" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="36" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="37" parent="4" name="version">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="38" parent="4" name="bidRequestType">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="39" parent="4" name="bidRequestState">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="40" parent="4" name="bidRequestAmount">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="41" parent="4" name="currentRate">
+        <mandatory>1</mandatory>
+        <data-type>decimal(8,4)</data-type>
+      </column>
+      <column id="42" parent="4" name="monthes2Return">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="43" parent="4" name="bidCount">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="44" parent="4" name="totalRewardAmount">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="45" parent="4" name="currentSum">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="46" parent="4" name="title">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="47" parent="4" name="description">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="48" parent="4" name="note">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="49" parent="4" name="disableDate">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="50" parent="4" name="createUser_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="51" parent="4" name="disableDays">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="52" parent="4" name="minBidAmount">
+        <mandatory>1</mandatory>
+        <data-type>decimal(18,4)</data-type>
+      </column>
+      <column id="53" parent="4" name="applyTime">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="54" parent="4" name="publishTime">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="55" parent="4" name="returnType">
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <key id="56" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="57" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="58" parent="5" name="state">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="59" parent="5" name="remark">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="60" parent="5" name="auditTime">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="61" parent="5" name="applyTime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="62" parent="5" name="auditor_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="63" parent="5" name="applier_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="64" parent="5" name="bidRequestId">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="65" parent="5" name="auditType">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <key id="66" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="67" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="68" parent="6" name="ip">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="69" parent="6" name="state">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="70" parent="6" name="username">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="71" parent="6" name="logintime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="72" parent="6" name="userType">
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <key id="73" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="74" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="75" parent="7" name="username">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="76" parent="7" name="password">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="77" parent="7" name="state">
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="78" parent="7" name="userType">
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <key id="79" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="80" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="81" parent="8" name="logininfo_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="82" parent="8" name="sendTime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="83" parent="8" name="uuid">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="84" parent="8" name="email">
+        <data-type>varchar(200)</data-type>
+      </column>
+      <key id="85" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="86" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="87" parent="9" name="bankName">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="88" parent="9" name="accountName">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="89" parent="9" name="accountNumber">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="90" parent="9" name="forkName">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="91" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="92" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="93" parent="10" name="realName">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="94" parent="10" name="sex">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="95" parent="10" name="bornDate">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="96" parent="10" name="idNumber">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="97" parent="10" name="address">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="98" parent="10" name="state">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="99" parent="10" name="image1">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="100" parent="10" name="image2">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="101" parent="10" name="remark">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="102" parent="10" name="auditTime">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="103" parent="10" name="applyTime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="104" parent="10" name="auditor_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="105" parent="10" name="applier_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="106" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="107" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="108" parent="11" name="sn">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="109" parent="11" name="title">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="110" parent="11" name="intro">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="111" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="112" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="113" parent="12" name="parentId">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="114" parent="12" name="title">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="115" parent="12" name="tvalue">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="116" parent="12" name="sequence">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="117" parent="12" name="intro">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="118" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="119" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="120" parent="13" name="state">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="121" parent="13" name="remark">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="122" parent="13" name="auditTime">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="123" parent="13" name="applyTime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="124" parent="13" name="auditor_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="125" parent="13" name="applier_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="126" parent="13" name="score">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="127" parent="13" name="image">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="128" parent="13" name="fileType_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="129" parent="13" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="130" parent="14" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="131" parent="14" name="version">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="132" parent="14" name="bitState">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="133" parent="14" name="realName">
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="134" parent="14" name="idNumber">
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="135" parent="14" name="phoneNumber">
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="136" parent="14" name="incomeGrade_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="137" parent="14" name="marriage_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="138" parent="14" name="kidCount_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="139" parent="14" name="educationBackground_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="140" parent="14" name="houseCondition_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="141" parent="14" name="email">
+        <data-type>varchar(200)</data-type>
+      </column>
+      <column id="142" parent="14" name="authScore">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="143" parent="14" name="realAuthId">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="144" parent="14" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="145" parent="15" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="146" parent="15" name="state">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="147" parent="15" name="remark">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="148" parent="15" name="auditTime">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="149" parent="15" name="applyTime">
+        <mandatory>1</mandatory>
+        <data-type>datetime</data-type>
+      </column>
+      <column id="150" parent="15" name="auditor_id">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="151" parent="15" name="applier_id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <key id="152" parent="15" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
