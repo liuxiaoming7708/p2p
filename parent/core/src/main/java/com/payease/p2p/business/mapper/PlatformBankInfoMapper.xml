@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.payease.p2p.business.mapper.PlatformBankInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.payease.p2p.business.domain.PlatformBankInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bankName" property="bankName" jdbcType="VARCHAR" />
+    <result column="accountName" property="accountName" jdbcType="VARCHAR" />
+    <result column="accountNumber" property="accountNumber" jdbcType="VARCHAR" />
+    <result column="forkName" property="forkName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey">
+    delete from platformbankinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert into platformbankinfo (bankName, accountName, accountNumber,forkName)
+    values (#{bankName,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR},
+      #{forkName,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey">
+    update platformbankinfo
+    set bankName = #{bankName,jdbcType=VARCHAR},
+      accountName = #{accountName,jdbcType=VARCHAR},
+      accountNumber = #{accountNumber,jdbcType=VARCHAR},
+      forkName = #{forkName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <sql id="base_column">
+    id, bankName, accountName, accountNumber, forkName
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select <include refid="base_column"/>
+    from platformbankinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select <include refid="base_column"/>
+    from platformbankinfo
+  </select>
+  
+  <select id="queryForCount" resultType="int">
+    SELECT count(id)
+    FROM platformbankinfo
+  </select>
+
+  <select id="query" resultMap="BaseResultMap">
+    select <include refid="base_column"/>
+    from platformbankinfo
+    LIMIT #{start},#{pageSize}
+  </select>
+
+</mapper>

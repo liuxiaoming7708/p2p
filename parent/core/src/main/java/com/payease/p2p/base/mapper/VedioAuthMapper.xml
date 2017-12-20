@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.payease.p2p.base.mapper.VedioAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.payease.p2p.base.domain.VedioAuth" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="auditTime" property="auditTime" jdbcType="TIMESTAMP" />
+    <result column="applyTime" property="applyTime" jdbcType="TIMESTAMP" />
+
+    <association property="applier" javaType="com.payease.p2p.base.domain.LoginInfo" columnPrefix="ap_">
+    <id column="id" property="id" />
+    <result column="username" property="username" />
+    </association>
+
+    <association property="auditor" javaType="com.payease.p2p.base.domain.LoginInfo" columnPrefix="au_">
+      <id column="id" property="id" />
+      <result column="username" property="username" />
+    </association>
+  </resultMap>
+
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="id" >
+    insert into vedioauth (state, remark, auditTime, applyTime, auditor_id, applier_id)
+    values (#{state,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP},
+      #{applyTime,jdbcType=TIMESTAMP}, #{auditor.id,jdbcType=BIGINT}, #{applier.id,jdbcType=BIGINT})
+  </insert>
+
+  <sql id="base_column">
+    v.id, v.state, v.remark, v.auditTime, v.applyTime,
+    ap.id AS ap_id,ap.username AS ap_username,
+    au.id AS au_id,au.username AS au_username
+  </sql>
+
+  <sql id="base_where">
+    <where>
+      <if test="beginDate!=null">
+        AND r.applyTime &gt;= #{beginDate}
+      </if>
+      <if test="endDate!=null">
+        AND r.applyTime &lt;= #{endDate}
+      </if>
+      <if test="state>-1">
+        AND r.state = #{state}
+      </if>
+      <if test="keyword!=null">
+        AND ap.username LIKE concat('%',#{keyword},'%')
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select <include refid="base_column" />
+    FROM vedioauth v JOIN login_info ap ON v.applier_id = ap.id JOIN login_info au ON v.auditor_id = au.id
+    where v.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="queryForCount" resultType="int">
+    SELECT COUNT(v.id)
+    FROM vedioauth v JOIN login_info ap ON v.applier_id = ap.id 
+    <include refid="base_where" />
+  </select>
+
+  <select id="query" resultMap="BaseResultMap">
+    SELECT <include refid="base_column" />
+    FROM vedioauth v JOIN login_info ap ON v.applier_id = ap.id JOIN login_info au ON v.auditor_id = au.id
+    <include refid="base_where" />
+    LIMIT #{start},#{pageSize}
+  </select>
+</mapper>

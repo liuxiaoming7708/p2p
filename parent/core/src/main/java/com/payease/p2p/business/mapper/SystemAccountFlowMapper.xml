@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.payease.p2p.business.mapper.SystemAccountFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.payease.p2p.business.domain.SystemAccountFlow" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="vdate" property="vdate" jdbcType="TIMESTAMP" />
+    <result column="accountType" property="accountType" jdbcType="TINYINT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="useableAmount" property="useableAmount" jdbcType="DECIMAL" />
+    <result column="freezedAmount" property="freezedAmount" jdbcType="DECIMAL" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert into systemaccountflow (vdate, accountType, amount, note, useableAmount, freezedAmount, account_id)
+    values (#{vdate,jdbcType=TIMESTAMP}, #{accountType,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL},
+      #{note,jdbcType=VARCHAR}, #{useableAmount,jdbcType=DECIMAL}, #{freezedAmount,jdbcType=DECIMAL},
+      #{accountId,jdbcType=BIGINT})
+  </insert>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, vdate, accountType, amount, note, useableAmount, freezedAmount, account_id
+    from systemaccountflow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+</mapper>

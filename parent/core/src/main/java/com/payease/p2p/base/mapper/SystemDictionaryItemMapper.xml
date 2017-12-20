@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.payease.p2p.base.mapper.SystemDictionaryItemMapper" >
+  <resultMap id="BaseResultMap" type="com.payease.p2p.base.domain.SystemDictionaryItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parentId" property="parentId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="tvalue" property="tvalue" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="TINYINT" />
+  </resultMap>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert into systemdictionaryitem (parentId, title, tvalue, 
+      sequence)
+    values (#{parentId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{tvalue,jdbcType=VARCHAR},
+      #{sequence,jdbcType=TINYINT})
+  </insert>
+
+  <update id="updateByPrimaryKey">
+    update systemdictionaryitem
+    set parentId = #{parentId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      tvalue = #{tvalue,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByParentSn" resultMap="BaseResultMap">
+    select item.id, item.parentId, item.title, item.tvalue, item.sequence
+    from systemdictionaryitem item JOIN systemdictionary sd ON item.parentId = sd.id
+    where sd.sn = #{sn}
+    ORDER BY sequence ASC
+  </select>
+
+  <sql id="base_column">
+    id, parentId, title, tvalue, sequence
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select <include refid="base_column" />
+    from systemdictionaryitem
+    where id = #{id}
+  </select>
+
+  <sql id="base_where">
+    <where>
+      <if test="keyword!=null">
+        AND title LIKE concat('%',#{keyword},'%')
+      </if>
+      <if test="parentId!=null">
+        AND parentId = #{parentId}
+      </if>
+    </where>
+  </sql>
+
+  <select id="queryForCount" resultType="int">
+    SELECT COUNT(id)
+    FROM systemdictionaryitem
+    <include refid="base_where"/>
+  </select>
+
+  <select id="query" resultMap="BaseResultMap">
+    SELECT <include refid="base_column" />
+    FROM systemdictionaryitem
+    <include refid="base_where" />
+    LIMIT #{start},#{pageSize}
+  </select>
+</mapper>

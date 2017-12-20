@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.payease.p2p.base.mapper.UserFileMapper" >
+  <resultMap id="BaseResultMap" type="com.payease.p2p.base.domain.UserFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="auditTime" property="auditTime" jdbcType="TIMESTAMP" />
+    <result column="applyTime" property="applyTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="TINYINT" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+
+    <association property="applier" javaType="com.payease.p2p.base.domain.LoginInfo" columnPrefix="ap_">
+      <id column="id" property="id" />
+      <result column="username" property="username" />
+    </association>
+
+    <association property="auditor" javaType="com.payease.p2p.base.domain.LoginInfo" columnPrefix="au_">
+      <id column="id" property="id" />
+      <result column="username" property="username" />
+    </association>
+
+    <association property="fileType" javaType="com.payease.p2p.base.domain.SystemDictionaryItem" columnPrefix="ft_">
+      <id column="id" property="id"/>
+      <result column="title" property="title"/>
+    </association>
+  </resultMap>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+    insert into userfile (state, remark, auditTime,applyTime, auditor_id, applier_id,score, image, fileType_id)
+    values (#{state,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP},
+      #{applyTime,jdbcType=TIMESTAMP}, #{auditor.id,jdbcType=BIGINT}, #{applier.id,jdbcType=BIGINT},
+      #{score,jdbcType=TINYINT}, #{image,jdbcType=VARCHAR}, #{fileType.id,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" >
+    update userfile
+    set state = #{state,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      auditTime = #{auditTime,jdbcType=TIMESTAMP},
+      applyTime = #{applyTime,jdbcType=TIMESTAMP},
+      auditor_id = #{auditor.id,jdbcType=BIGINT},
+      applier_id = #{applier.id,jdbcType=BIGINT},
+      score = #{score,jdbcType=TINYINT},
+      image = #{image,jdbcType=VARCHAR},
+      fileType_id = #{fileType.id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <sql id="base_column">
+    f.id, f.state, f.remark, f.auditTime, f.applyTime, f.score, f.image,
+    au.id AS au_id, au.username AS au_username,
+    ap.id AS ap_id, ap.username AS ap_username,
+    ft.id AS ft_id, ft.title AS ft_title
+  </sql>
+
+  <sql id="base_table">
+    userfile f JOIN login_info ap ON f.applier_id = ap.id
+            LEFT JOIN login_info au ON f.auditor_id = au.id
+            LEFT JOIN systemdictionaryitem ft ON f.fileType_id = ft.id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select <include refid="base_column" />
+    from   <include refid="base_table" />
+    where f.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="listUserFilesByHasSelectType" resultMap="BaseResultMap">
+    select <include refid="base_column" />
+    from   <include refid="base_table" />
+    where f.applier_id = #{loginInfoId} AND
+    <if test="hasTypes" >
+      f.fileType_id IS NOT NULL
+    </if>
+    <if test="!hasTypes">
+      f.fileType_id IS NULL
+    </if>
+  </select>
+
+  <sql id="base_where">
+    <where>
+      <if test="beginDate!=null">
+        AND f.applyTime &gt;= #{beginDate}
+      </if>
+      <if test="endDate!=null">
+        AND f.applyTime &lt;= #{endDate}
+      </if>
+      <if test="state>-1">
+        AND f.state = #{state}
+      </if>
+      <if test="applierId!=null">
+        AND f.applier_id = #{applierId}
+      </if>
+        AND f.fileType_id IS NOT NULL
+    </where>
+  </sql>
+
+  <select id="queryForCount" resultType="int">
+    SELECT count(f.id)
+    FROM userfile f
+    <include refid="base_where"/>
+  </select>
+
+  <select id="query" resultMap="BaseResultMap">
+    select <include refid="base_column" />
+    from   <include refid="base_table" />
+    <include refid="base_where"/>
+    <if test="pageSize>0">
+    LIMIT #{start},#{pageSize}
+    </if>
+  </select>
+</mapper>
